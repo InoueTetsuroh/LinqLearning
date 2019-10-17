@@ -1,0 +1,27 @@
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\bin\Debug\LinqLearning.exe
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\bin\Debug\LinqLearning.pdb
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.csprojAssemblyReference.cache
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.Form1.resources
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.Properties.Resources.resources
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.csproj.GenerateResource.cache
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.csproj.CoreCompileInputs.cache
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.exe
+C:\Users\哲郎\AppData\Local\Temporary Projects\LinqLearning\obj\Debug\LinqLearning.pdb
+C:\Source\dotNet\LinqLearning\bin\Debug\LinqLearning.exe
+C:\Source\dotNet\LinqLearning\bin\Debug\LinqLearning.pdb
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.csprojAssemblyReference.cache
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.Form1.resources
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.Properties.Resources.resources
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.csproj.GenerateResource.cache
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.csproj.CoreCompileInputs.cache
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.exe
+C:\Source\dotNet\LinqLearning\obj\Debug\LinqLearning.pdb
+C:\Source\GitHub\LinqLearning\bin\Debug\LinqLearning.exe
+C:\Source\GitHub\LinqLearning\bin\Debug\LinqLearning.pdb
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.csprojAssemblyReference.cache
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.Properties.Resources.resources
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.csproj.GenerateResource.cache
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.csproj.CoreCompileInputs.cache
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.exe
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.pdb
+C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.Display.resources
