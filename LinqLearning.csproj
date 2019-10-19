@@ -49,9 +49,11 @@
     <Compile Include="Display.Designer.cs">
       <DependentUpon>Display.cs</DependentUpon>
     </Compile>
+    <Compile Include="DisplayService.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sample.cs" />
     <EmbeddedResource Include="Display.resx">
       <DependentUpon>Display.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +75,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="sample.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

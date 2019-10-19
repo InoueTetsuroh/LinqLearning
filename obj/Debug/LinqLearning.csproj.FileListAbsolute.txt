@@ -25,3 +25,4 @@ C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.csproj.CoreCompileInputs.ca
 C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.exe
 C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.pdb
 C:\Source\GitHub\LinqLearning\obj\Debug\LinqLearning.Display.resources
+C:\Source\GitHub\LinqLearning\bin\Debug\sample.csv
