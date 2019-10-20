@@ -9,20 +9,8 @@ namespace LinqLearning
 {
     public class DisplayService
     {
-        public void MainService(Display display)
-        {
-            UseIEnumerableInt(display);
 
-            display.OutputLine(""); //改行
-
-            UseIEnumerableString(display);
-
-            display.OutputLine(""); //改行
-
-            UseCsvFile(display);
-        }
-
-        private void UseIEnumerableString(Display display)
+        public void UseIEnumerableString(Display display)
         {
             string str = "LINQ Linq linq";
 
@@ -93,7 +81,7 @@ namespace LinqLearning
 
         }
 
-        private void UseIEnumerableInt(Display display)
+        public void UseIEnumerableInt(Display display)
         {
             IEnumerable<int> numbers = Enumerable.Range(1, 10);
 
@@ -119,13 +107,134 @@ namespace LinqLearning
             display.OutputLine(numbers.Where(s => s % 2 == 0).Sum());
         }
 
-        private void UseCsvFile(Display display)
+        public void UseCsvFile(Display display)
         {
             IEnumerable<string> lines = File.ReadAllLines(@"sample.csv");
 
             foreach (string line in lines)
                 { display.OutputLine(line); };
-                // なんでlines.ForEachできないのか⇒ForEachを持ってるのはList<T>だから。
+            // なんでlines.ForEachできないのか⇒ForEachを持ってるのはList<T>だから。
+
+            display.OutputLine("ReadAllLines End");
+
+            //処理実行
+
+            IEnumerable<Sample> samples = lines.Select(line => Sample.CreateFromCsvFile(display,line));
+
+            display.OutputLine("Select End");
+
+            IEnumerable<Sample> selectedA = samples.Where(sample => Sample.IsKindA(display, sample));
+
+            display.OutputLine("Where End");
+
+            int Sum = selectedA.SumValues(display);
+
+            display.OutputLine("Sum End");
+
+            display.OutputLine($"Aだけの合計は {Sum}");
+
+            // 実行順番が想像と違うはずなので確認すること。
+            // Linq拡張メソッド内部のループは分解／再構成されてから実行される。
+            // Linqが扱うコレクションには実体がない。（メモリを節約する）
+            // Linq拡張メソッドの内部の処理は遅延実行される。
+
+            //残処理実行
+            display.OutputLine("残りのデータも合計する");
+
+            IEnumerable<Sample> selectedB = samples.Where(sample => !Sample.IsKindA(display, sample));
+
+            display.OutputLine("Where End");
+
+            int sumB = selectedB.SumValues(display);
+
+            display.OutputLine("Sum End");
+
+            display.OutputLine($"Bだけの合計は {sumB}");
+
+            // ToList,ToArrayの罠(即時実行されてしまう。)　⇒　即時実行されるということはその時点でメモリ展開されるという意味。
+            // メモリ展開したほうがいい場合もあるので、ＣＰＵに負荷をかけるか、メモリに負荷をかけるかはトレードオフ
+
+            // ToListした場合の処理順序デモ
+            List<Sample> samplesList = lines.Select(line => Sample.CreateFromCsvFile(display, line)).ToList();
+
+            display.OutputLine("Select End");
+
+            IEnumerable<Sample> selectedAList = samplesList.Where(sample => Sample.IsKindA(display, sample));
+
+            display.OutputLine("Where End");
+
+            int SumList = selectedAList.SumValues(display);
+
+            display.OutputLine("Sum End");
+
+            display.OutputLine($"Aだけの合計は {SumList}");
+
+        }
+    
+        public void MakeLinQExtensionMethod(Display display)
+        {
+            // 本筋はExtensionクラスを参照
+            // LinQ拡張メソッドの性質
+            //     拡張メソッドである
+            //     入力  はIEnumerable<T> か IQueryable<T>
+            //     戻り値はIEnumerable<T> か IQueryable<T> か スカラー(単独の数値またはオブジェクト ex. Sum())
+            //     IEumerable<T> か IQueryable<T> 型を返す場合は必要とされたときに実行されること(遅延実行されること)
+
+            IEnumerable<int> numbers = Enumerable.Range(1, 10);
+
+            // LessThenをWhereで表現
+            display.WriteLine(numbers.Where(i => i < 4));
+
+            display.OutputLine("");
+
+            // LessThenメソッドを作成
+            display.WriteLine(numbers.LessThen(4));
+            // 拡張メソッド内でLinqを使うなら上の書き方でよいので現実味がない。
+            // 次は拡張メソッド内でLinqを使わない書き方。 LessThenNotLinq
+
+            display.OutputLine("");
+
+            // これは即時実行になるバージョン
+            display.WriteLine(numbers.LessThenNotLinq(4));
+
+            display.OutputLine("");
+
+            // これが遅延実行になるバージョン
+            display.WriteLine(numbers.LessThenNotList(4));
+
+            display.OutputLine("");
+
+            // LinQ拡張メソッド(ラムダ式定義版)
+            display.WriteStrings(numbers.ToQuotedString(n => n < 4));
+
+        }
+
+        public void MakeLinQDataSourceClass(Display display)
+        {
+            // MakeLinQExtensionMethodで、Linqメソッドの作成についてコーディングした。
+            // このメソッドでは、Linqの先頭(ListやIEnumerable,String[])の作成についてコーディングする。(⇒LinqDataSourceと呼ぶこととする)
+
+            // LinqDataSourceはIEnumerable<T>型のクラスか、IEnumeraable<T>型を返すメソッド／プロパティを持ったクラス。
+            EvenNumbers even = new EvenNumbers(10);
+            display.WriteLine(even.Numbers.Select(n => n));
+
+            display.OutputLine("");
+
+            var samples = SampleDataSource.ReadA(@".\sample.csv");
+            foreach (var s in samples)
+                display.OutputLine($"Kind={ s.Kind} , Value={s.Value}");
+
+            display.OutputLine("");
+
+            var over100 = samples.Where(s =>
+                                        {
+                                            display.OutputLine(($"{ s.Kind} , {s.Value}"));　// 検証用
+                                            return s.Value > 100;
+                                        }
+            );
+            
+            foreach (var s in over100)
+                display.OutputLine($"Kind={ s.Kind} , Value={s.Value}");
 
         }
     }

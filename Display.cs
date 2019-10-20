@@ -18,10 +18,44 @@ namespace LinqLearning
             InitializeComponent();
         }
 
-        private void OK_Click(object sender, EventArgs e)
+        private void BtnUseIEnumerableInt_Click(object sender, EventArgs e)
         {
+            OutputLineClear();
             DisplayService displayService = new DisplayService();
-            displayService.MainService(this);
+            displayService.UseIEnumerableInt(this);
+            output.Focus();
+        }
+
+        private void BtnUseIEnumerableString_Click(object sender, EventArgs e)
+        {
+            OutputLineClear();
+            DisplayService displayService = new DisplayService();
+            displayService.UseIEnumerableString(this);
+            output.Focus();
+        }
+
+        private void BtnUseCsvFile_Click(object sender, EventArgs e)
+        {
+            OutputLineClear();
+            DisplayService displayService = new DisplayService();
+            displayService.UseCsvFile(this);
+            output.Focus();
+        }
+
+        private void BtnMakeLinQExtensionMethod_Click(object sender, EventArgs e)
+        {
+            OutputLineClear();
+            DisplayService displayService = new DisplayService();
+            displayService.MakeLinQExtensionMethod(this);
+            output.Focus();
+        }
+
+        private void BtnMakeLinQDataSourceClass_Click(object sender, EventArgs e)
+        {
+            OutputLineClear();
+            DisplayService displayService = new DisplayService();
+            displayService.MakeLinQDataSourceClass(this);
+            output.Focus();
         }
 
         public void OutputLine(string str)
@@ -58,5 +92,11 @@ namespace LinqLearning
             }
             output.Text = output.Text + sb.ToString();
         }
+
+        private void OutputLineClear()
+        {
+            output.Text = "";
+        }
+
     }
 }
